@@ -1,0 +1,2855 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/4/2026 8:28:56 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MAYS"
+  DTS:CreatorName="MAYS\HP ZBook 15u G6"
+  DTS:DTSID="{C757DF56-365E-4683-81AB-9C6431F3E3B2}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="21"
+  DTS:VersionGUID="{D6432010-FDA8-4F0C-A9D0-73984B144ABC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6A3B2A44-E4B0-4A59-9C47-7E7A08AB1BB7}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalDWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalDWH;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{6A3B2A44-E4B0-4A59-9C47-7E7A08AB1BB7}MAYS\MSSQLSERVER1.HospitalDWH;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSource]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{815714DF-C2A8-4106-92F1-27242ADF4CCE}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalSource">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalSource;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-STG_patients-{815714DF-C2A8-4106-92F1-27242ADF4CCE}MAYS\MSSQLSERVER1.HospitalSource;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{3596DA25-A458-468F-ABA1-FDD1B818F3EA}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalSTG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalSTG;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{3596DA25-A458-468F-ABA1-FDD1B818F3EA}MAYS\MSSQLSERVER1.HospitalSTG;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2438E239-99A0-4920-945C-13564E9CE07D}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalSTG 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalSTG;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-STG_patients-{2438E239-99A0-4920-945C-13564E9CE07D}MAYS\MSSQLSERVER1.HospitalSTG;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Truncate STG_Procedures"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8C34375A-48A8-4B1A-B64D-0BBE778A06CA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Truncate STG_Procedures"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{6A3B2A44-E4B0-4A59-9C47-7E7A08AB1BB7}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE HospitalSTG.dbo.stg_procedures" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load F_Procedures"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D73B8A16-083E-4605-8C1E-6DD55AB8C432}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load F_Procedures"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load F_Procedures\Derived Column - Calculate measures"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column - Calculate measures"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load F_Procedures\Derived Column - Calculate measures.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Calculate measures.Inputs[Derived Column Input].Columns[StartTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StartTime"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]" />
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Calculate measures.Inputs[Derived Column Input].Columns[StopTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StopTime"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StopTime]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load F_Procedures\Derived Column - Calculate measures.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Output].Columns[ProcedureDurationMinutes]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Output].Columns[ProcedureDurationMinutes]"
+                      name="ProcedureDurationMinutes"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_R4)[DATEDIFF]("mi",#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]},#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StopTime]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_R4)DATEDIFF("mi",StartTime,StopTime)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load F_Procedures\Derived Column - Calculate measures.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Procedures\Derived Column - Extract Date"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column - Extract Date"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load F_Procedures\Derived Column - Extract Date.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Extract Date.Inputs[Derived Column Input].Columns[StartTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StartTime"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load F_Procedures\Derived Column - Extract Date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Output].Columns[StartDate]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Output].Columns[StartDate]"
+                      name="StartDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_STR,10,1252)YEAR(#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]}) + "-" + RIGHT("0" + (DT_STR,2,1252)MONTH(#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]}),2) + "-" + RIGHT("0" + (DT_STR,2,1252)DAY(#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]}),2)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_STR,10,1252)YEAR(StartTime) + "-" + RIGHT("0" + (DT_STR,2,1252)MONTH(StartTime),2) + "-" + RIGHT("0" + (DT_STR,2,1252)DAY(StartTime),2)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load F_Procedures\Derived Column - Extract Date.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Procedures\Derived Column - Extract time parts"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column - Extract time parts"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load F_Procedures\Derived Column - Extract time parts.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Extract time parts.Inputs[Derived Column Input].Columns[StartTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StartTime"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load F_Procedures\Derived Column - Extract time parts.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output].Columns[StartHour]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output].Columns[StartHour]"
+                      name="StartHour"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEPART]("hh",#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEPART("hh",StartTime)</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output].Columns[StartMinute]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output].Columns[StartMinute]"
+                      name="StartMinute"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEPART]("mi",#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEPART("mi",StartTime)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load F_Procedures\Derived Column - Extract time parts.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Procedures\Lookup - DateKey"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup - DateKey"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT CONVERT(varchar(10), FullDate, 23) AS FullDateStr, DateKey FROM dbo.DimDate</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT CONVERT(varchar(10), FullDate, 23) AS FullDateStr, DateKey FROM dbo.DimDate) [refTable]
+where [refTable].[FullDateStr] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="FullDateStr" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="DateKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Output].Columns[StartDate]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_Procedures\Lookup - DateKey.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load F_Procedures\Lookup - DateKey.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Lookup - DateKey.Inputs[Lookup Input].Columns[StartDate]"
+                      cachedDataType="wstr"
+                      cachedLength="16"
+                      cachedName="StartDate"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Output].Columns[StartDate]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">FullDateStr</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - DateKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Match Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Match Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DateKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - DateKey.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - DateKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Procedures\Lookup - EncounterKey"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Joins additional columns to the data flow by looking up values in a table."
+              name="Lookup - EncounterKey"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT EncounterId, EncounterKey
+FROM dbo.F_Encounters</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT EncounterId, EncounterKey
+FROM dbo.F_Encounters) [refTable]
+where [refTable].[EncounterId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="EncounterId" dataType="DT_WSTR" length="50" /&gt;&lt;referenceColumn name="EncounterKey" dataType="DT_I4" /&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses."
+                  name="ParameterMap">#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[EncounterId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_Procedures\Lookup - EncounterKey.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load F_Procedures\Lookup - EncounterKey.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Lookup - EncounterKey.Inputs[Lookup Input].Columns[EncounterId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EncounterId"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[EncounterId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">EncounterId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - EncounterKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Match Output].Columns[EncounterKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Match Output].Columns[EncounterKey]"
+                      name="EncounterKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">EncounterKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset."
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - EncounterKey.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - EncounterKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Procedures\Lookup - PatientKey"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup - PatientKey"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT PatientId, PatientKey 
+FROM dbo.DimPatient 
+WHERE IsCurrent = 1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT PatientId, PatientKey 
+FROM dbo.DimPatient 
+WHERE IsCurrent = 1) [refTable]
+where [refTable].[PatientId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="PatientId" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PatientKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[PatientId]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_Procedures\Lookup - PatientKey.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load F_Procedures\Lookup - PatientKey.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Lookup - PatientKey.Inputs[Lookup Input].Columns[PatientId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PatientId"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[PatientId]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">PatientId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - PatientKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Match Output].Columns[PatientKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Match Output].Columns[PatientKey]"
+                      name="PatientKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PatientKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - PatientKey.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - PatientKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Procedures\Lookup - ProcedureKey"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup - ProcedureKey"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT ProcedureCode, ProcedureKey 
+FROM dbo.DimProcedure</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT ProcedureCode, ProcedureKey 
+FROM dbo.DimProcedure) [refTable]
+where [refTable].[ProcedureCode] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ProcedureCode" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProcedureKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[Code]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_Procedures\Lookup - ProcedureKey.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load F_Procedures\Lookup - ProcedureKey.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Lookup - ProcedureKey.Inputs[Lookup Input].Columns[Code]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Code"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[Code]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ProcedureCode</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - ProcedureKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Match Output].Columns[ProcedureKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Match Output].Columns[ProcedureKey]"
+                      name="ProcedureKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ProcedureKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - ProcedureKey.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - ProcedureKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Procedures\Lookup - TimeKey config"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup - TimeKey config"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT TimeKey, Hour, Minute 
+FROM dbo.DimTime</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT TimeKey, Hour, Minute 
+FROM dbo.DimTime) [refTable]
+where [refTable].[Hour] = ? and [refTable].[Minute] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="TimeKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Hour" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Minute" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output].Columns[StartHour]};#{Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output].Columns[StartMinute]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_Procedures\Lookup - TimeKey config.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load F_Procedures\Lookup - TimeKey config.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Lookup - TimeKey config.Inputs[Lookup Input].Columns[StartHour]"
+                      cachedDataType="i4"
+                      cachedName="StartHour"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output].Columns[StartHour]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Hour</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\Lookup - TimeKey config.Inputs[Lookup Input].Columns[StartMinute]"
+                      cachedDataType="i4"
+                      cachedName="StartMinute"
+                      lineageId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output].Columns[StartMinute]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Minute</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - TimeKey config.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Match Output].Columns[TimeKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Match Output].Columns[TimeKey]"
+                      name="TimeKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">TimeKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - TimeKey config.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load F_Procedures\Lookup - TimeKey config.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination - F_Procedures"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[F_Procedures]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].Columns[Base_Cost]"
+                      cachedDataType="r8"
+                      cachedName="Base_Cost"
+                      externalMetadataColumnId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[Base_Cost]"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[Base_Cost]" />
+                    <inputColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].Columns[PatientKey]"
+                      cachedDataType="i4"
+                      cachedName="PatientKey"
+                      externalMetadataColumnId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[PatientKey]"
+                      lineageId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Match Output].Columns[PatientKey]" />
+                    <inputColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].Columns[ProcedureKey]"
+                      cachedDataType="i4"
+                      cachedName="ProcedureKey"
+                      externalMetadataColumnId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ProcedureKey]"
+                      lineageId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Match Output].Columns[ProcedureKey]" />
+                    <inputColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      lineageId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Match Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].Columns[TimeKey]"
+                      cachedDataType="i4"
+                      cachedName="TimeKey"
+                      externalMetadataColumnId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[TimeKey]"
+                      lineageId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Match Output].Columns[TimeKey]" />
+                    <inputColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].Columns[ProcedureDurationMinutes]"
+                      cachedDataType="r4"
+                      cachedName="ProcedureDurationMinutes"
+                      externalMetadataColumnId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ProcedureDurationMinutes]"
+                      lineageId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Output].Columns[ProcedureDurationMinutes]" />
+                    <inputColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].Columns[EncounterKey]"
+                      cachedDataType="i4"
+                      cachedName="EncounterKey"
+                      externalMetadataColumnId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[EncounterKey]"
+                      lineageId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Match Output].Columns[EncounterKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ProcedureFactKey]"
+                      dataType="i4"
+                      name="ProcedureFactKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[PatientKey]"
+                      dataType="i4"
+                      name="PatientKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[EncounterKey]"
+                      dataType="i4"
+                      name="EncounterKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ProcedureKey]"
+                      dataType="i4"
+                      name="ProcedureKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[DateKey]"
+                      dataType="i4"
+                      name="DateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[TimeKey]"
+                      dataType="i4"
+                      name="TimeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[Base_Cost]"
+                      dataType="r8"
+                      name="Base_Cost" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ProcedureDurationMinutes]"
+                      dataType="r8"
+                      name="ProcedureDurationMinutes" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load F_Procedures\STG Procedures"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="STG Procedures"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_procedures]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load F_Procedures\STG Procedures.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[ProcedureId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[ProcedureId]"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[ProcedureId]"
+                      name="ProcedureId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[StartTime]"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StartTime]"
+                      name="StartTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StopTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[StopTime]"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[StopTime]"
+                      name="StopTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[PatientId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[PatientId]"
+                      length="50"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[PatientId]"
+                      name="PatientId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[EncounterId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[EncounterId]"
+                      length="50"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[EncounterId]"
+                      name="EncounterId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                      length="20"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[Code]"
+                      name="Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      length="500"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[Base_Cost]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[Base_Cost]"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[Base_Cost]"
+                      name="Base_Cost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                      length="20"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                      name="ReasonCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[ReasonDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[ReasonDescription]"
+                      length="500"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[ReasonDescription]"
+                      name="ReasonDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      name="src_update_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[create_timestamp]"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].Columns[create_timestamp]"
+                      name="create_timestamp"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[ProcedureId]"
+                      dataType="i4"
+                      name="ProcedureId" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[StartTime]"
+                      dataType="dbTimeStamp"
+                      name="StartTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[StopTime]"
+                      dataType="dbTimeStamp"
+                      name="StopTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[PatientId]"
+                      dataType="wstr"
+                      length="50"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[EncounterId]"
+                      dataType="wstr"
+                      length="50"
+                      name="EncounterId" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                      dataType="wstr"
+                      length="20"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[Base_Cost]"
+                      dataType="r8"
+                      name="Base_Cost" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="ReasonCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[ReasonDescription]"
+                      dataType="wstr"
+                      length="500"
+                      name="ReasonDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ProcedureId]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ProcedureId]"
+                      name="ProcedureId" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[StartTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[StartTime]"
+                      name="StartTime" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[StopTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[StopTime]"
+                      name="StopTime" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[PatientId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[PatientId]"
+                      name="PatientId" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[EncounterId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[EncounterId]"
+                      name="EncounterId" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[Code]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[Code]"
+                      name="Code" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[Base_Cost]"
+                      dataType="r8"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[Base_Cost]"
+                      name="Base_Cost" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                      name="ReasonCode" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ReasonDescription]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ReasonDescription]"
+                      name="ReasonDescription" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      name="src_update_date" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[create_timestamp]"
+                      name="create_timestamp" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load F_Procedures.Paths[Derived Column Output]"
+              endId="Package\Load F_Procedures\Lookup - DateKey.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Load F_Procedures\Derived Column - Extract Date.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load F_Procedures.Paths[Derived Column Output1]"
+              endId="Package\Load F_Procedures\Lookup - TimeKey config.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Load F_Procedures\Derived Column - Extract time parts.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load F_Procedures.Paths[Derived Column Output2]"
+              endId="Package\Load F_Procedures\Lookup - EncounterKey.Inputs[Lookup Input]"
+              name="Derived Column Output"
+              startId="Package\Load F_Procedures\Derived Column - Calculate measures.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load F_Procedures.Paths[Lookup Match Output]"
+              endId="Package\Load F_Procedures\Lookup - ProcedureKey.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Load F_Procedures\Lookup - PatientKey.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load F_Procedures.Paths[Lookup Match Output1]"
+              endId="Package\Load F_Procedures\Derived Column - Extract Date.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\Load F_Procedures\Lookup - ProcedureKey.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load F_Procedures.Paths[Lookup Match Output2]"
+              endId="Package\Load F_Procedures\Derived Column - Extract time parts.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\Load F_Procedures\Lookup - DateKey.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load F_Procedures.Paths[Lookup Match Output3]"
+              endId="Package\Load F_Procedures\Derived Column - Calculate measures.Inputs[Derived Column Input]"
+              name="Lookup Match Output"
+              startId="Package\Load F_Procedures\Lookup - TimeKey config.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load F_Procedures.Paths[Lookup Match Output4]"
+              endId="Package\Load F_Procedures\OLE DB Destination - F_Procedures.Inputs[OLE DB Destination Input]"
+              name="Lookup Match Output"
+              startId="Package\Load F_Procedures\Lookup - EncounterKey.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load F_Procedures.Paths[OLE DB Source Output]"
+              endId="Package\Load F_Procedures\Lookup - PatientKey.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load F_Procedures\STG Procedures.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Src to STG"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{66DAA5B8-795E-4052-8E42-16007371CE3E}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Src to STG"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Src to STG\OLE DB Destination - STG Procedures"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination - STG Procedures"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_procedures]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Src to STG\OLE DB Destination - STG Procedures.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[src_update_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="src_update_date"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[src_update_date]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[ProcedureId]"
+                      cachedDataType="i4"
+                      cachedName="ProcedureId"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ProcedureId]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[ProcedureId]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[StartTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StartTime"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[StartTime]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[StartTime]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[StopTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StopTime"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[StopTime]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[StopTime]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[PatientId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PatientId"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[PatientId]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[EncounterId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EncounterId"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[EncounterId]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[EncounterId]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[Code]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Code"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[Code]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[Description]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="Description"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[Base_Cost]"
+                      cachedDataType="r8"
+                      cachedName="Base_Cost"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[Base_Cost]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[Base_Cost]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[ReasonCode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ReasonCode"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ReasonCode]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[ReasonCode]" />
+                    <inputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].Columns[ReasonDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="ReasonDescription"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ReasonDescription]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[ReasonDescription]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ProcedureId]"
+                      dataType="i4"
+                      name="ProcedureId" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[StartTime]"
+                      dataType="dbTimeStamp"
+                      name="StartTime" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[StopTime]"
+                      dataType="dbTimeStamp"
+                      name="StopTime" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      dataType="wstr"
+                      length="50"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[EncounterId]"
+                      dataType="wstr"
+                      length="50"
+                      name="EncounterId" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                      dataType="wstr"
+                      length="20"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[Base_Cost]"
+                      dataType="r8"
+                      name="Base_Cost" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ReasonCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="ReasonCode" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input].ExternalColumns[ReasonDescription]"
+                      dataType="wstr"
+                      length="500"
+                      name="ReasonDescription" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Src to STG\OLE DB Destination - STG Procedures.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Src to STG\OLE DB Destination - STG Procedures.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Destination - STG Procedures.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Src to STG\OLE DB Destination - STG Procedures.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Src to STG\OLE DB Source - SRC Procedures"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source - SRC Procedures"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    ProcedureId,
+    StartTime,
+    StopTime,
+    PatientId,
+    EncounterId,
+    Code,
+    Description,
+    Base_Cost,
+    ReasonCode,
+    ReasonDescription,
+    LastModified AS src_update_date
+FROM dbo.procedures</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{BCA3DE1A-122A-42B7-A4AD-1F51F4CAED8E};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Src to STG\OLE DB Source - SRC Procedures.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSource]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSource]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      name="src_update_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[ProcedureId]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[ProcedureId]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[ProcedureId]"
+                      name="ProcedureId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[StartTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[StartTime]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[StartTime]"
+                      name="StartTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[StopTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[StopTime]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[StopTime]"
+                      name="StopTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[PatientId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[PatientId]"
+                      length="50"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[PatientId]"
+                      name="PatientId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[EncounterId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[EncounterId]"
+                      length="50"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[EncounterId]"
+                      name="EncounterId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                      length="20"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[Code]"
+                      name="Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      length="500"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[Base_Cost]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[Base_Cost]"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[Base_Cost]"
+                      name="Base_Cost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                      length="20"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                      name="ReasonCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[ReasonDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[ReasonDescription]"
+                      length="500"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].Columns[ReasonDescription]"
+                      name="ReasonDescription"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[ProcedureId]"
+                      dataType="i4"
+                      name="ProcedureId" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[StartTime]"
+                      dataType="dbTimeStamp"
+                      name="StartTime" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[StopTime]"
+                      dataType="dbTimeStamp"
+                      name="StopTime" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[PatientId]"
+                      dataType="wstr"
+                      length="50"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[EncounterId]"
+                      dataType="wstr"
+                      length="50"
+                      name="EncounterId" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                      dataType="wstr"
+                      length="20"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[Base_Cost]"
+                      dataType="r8"
+                      name="Base_Cost" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="ReasonCode" />
+                    <externalMetadataColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output].ExternalColumns[ReasonDescription]"
+                      dataType="wstr"
+                      length="500"
+                      name="ReasonDescription" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ProcedureId]"
+                      dataType="i4"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ProcedureId]"
+                      name="ProcedureId" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[StartTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[StartTime]"
+                      name="StartTime" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[StopTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[StopTime]"
+                      name="StopTime" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[PatientId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[PatientId]"
+                      name="PatientId" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[EncounterId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[EncounterId]"
+                      name="EncounterId" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[Code]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[Code]"
+                      name="Code" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[Base_Cost]"
+                      dataType="r8"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[Base_Cost]"
+                      name="Base_Cost" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                      name="ReasonCode" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ReasonDescription]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ReasonDescription]"
+                      name="ReasonDescription" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      name="src_update_date" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Src to STG.Paths[OLE DB Source Output]"
+              endId="Package\Src to STG\OLE DB Destination - STG Procedures.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Src to STG\OLE DB Source - SRC Procedures.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{ED2428D6-8256-4696-9686-8B31CE8AF370}"
+      DTS:From="Package\Load F_Procedures"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task - Truncate STG_Procedures" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{C4787891-0C89-4181-8DE8-114FDC17FD9E}"
+      DTS:From="Package\Src to STG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load F_Procedures" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="297.6,41.6"
+          Id="Package\Execute SQL Task - Truncate STG_Procedures"
+          TopLeft="26.6666652096642,245.266664961113" />
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\Load F_Procedures"
+          TopLeft="80.8333289167949,138.666665702396" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Src to STG"
+          TopLeft="83.3333287802009,45.0666663532787" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="166.94999706323,180.266665702396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,64.9999992587169"
+              Start="0,0"
+              End="0,57.4999992587169">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.4999992587169" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="162.083328848498,86.6666663532787">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,51.9999993491173"
+              Start="0,0"
+              End="0,44.4999993491173">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,44.4999993491173" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load F_Procedures">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="219.2,41.6"
+          Id="Package\Load F_Procedures\Derived Column - Extract Date"
+          TopLeft="54.3666649364764,310.3" />
+        <NodeLayout
+          Size="156,41.6"
+          Id="Package\Load F_Procedures\STG Procedures"
+          TopLeft="85.9666649364764,5.49999999999995" />
+        <NodeLayout
+          Size="253.6,41.6"
+          Id="Package\Load F_Procedures\Derived Column - Calculate measures"
+          TopLeft="46.6666641169126,726.53333100703" />
+        <NodeLayout
+          Size="245.6,41.6"
+          Id="Package\Load F_Procedures\OLE DB Destination - F_Procedures"
+          TopLeft="45.6666643901005,964.199997450709" />
+        <NodeLayout
+          Size="187.2,41.6"
+          Id="Package\Load F_Procedures\Lookup - EncounterKey"
+          TopLeft="84.8666638437246,846.99999755919" />
+        <NodeLayout
+          Size="187.2,41.6"
+          Id="Package\Load F_Procedures\Lookup - ProcedureKey"
+          TopLeft="70.3666649364764,208.7" />
+        <NodeLayout
+          Size="242.4,41.6"
+          Id="Package\Load F_Procedures\Derived Column - Extract time parts"
+          TopLeft="42.7666649364765,513.5" />
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Load F_Procedures\Lookup - DateKey"
+          TopLeft="83.1666649364765,411.9" />
+        <NodeLayout
+          Size="172,41.6"
+          Id="Package\Load F_Procedures\Lookup - PatientKey"
+          TopLeft="77.9666649364764,107.1" />
+        <NodeLayout
+          Size="204.8,41.6"
+          Id="Package\Load F_Procedures\Lookup - TimeKey config"
+          TopLeft="61.5666649364765,615.1" />
+        <EdgeLayout
+          Id="Package\Load F_Procedures.Paths[Lookup Match Output4]"
+          TopLeft="178.466663843725,888.59999755919">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9.99999945362401,75.5999998915194"
+              Start="0,0"
+              End="-9.99999945362401,68.0999998915194">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.7999999457597" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.7999999457597"
+                    Point2="0,37.7999999457597"
+                    Point3="-4,37.7999999457597" />
+                  <mssgle:LineSegment
+                    End="-5.99999945362401,37.7999999457597" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5.99999945362401,37.7999999457597"
+                    Point2="-9.99999945362401,37.7999999457597"
+                    Point3="-9.99999945362401,41.7999999457597" />
+                  <mssgle:LineSegment
+                    End="-9.99999945362401,68.0999998915194" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-53.191386445562,42.7999999457597,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load F_Procedures.Paths[Lookup Match Output3]"
+          TopLeft="163.966664936476,656.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.49999918043616,69.8333310070303"
+              Start="0,0"
+              End="9.49999918043616,62.3333310070303">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.9166655035152" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,30.9166655035152"
+                    Point2="0,34.9166655035152"
+                    Point3="4,34.9166655035152" />
+                  <mssgle:LineSegment
+                    End="5.49999918043616,34.9166655035152" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.49999918043616,34.9166655035152"
+                    Point2="9.49999918043616,34.9166655035152"
+                    Point3="9.49999918043616,38.9166655035152" />
+                  <mssgle:LineSegment
+                    End="9.49999918043616,62.3333310070303" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-43.4413871285319,39.9166655035152,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load F_Procedures.Paths[Lookup Match Output2]"
+          TopLeft="163.966664936476,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load F_Procedures.Paths[Lookup Match Output1]"
+          TopLeft="163.966664936476,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453125,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load F_Procedures.Paths[Lookup Match Output]"
+          TopLeft="163.966664936476,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,20.4453124999999,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load F_Procedures.Paths[Derived Column Output2]"
+          TopLeft="175.966663980319,768.13333100703">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,78.8666665521596"
+              Start="0,0"
+              End="0,71.3666665521596">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,71.3666665521596" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load F_Procedures.Paths[Derived Column Output1]"
+          TopLeft="163.966664936476,555.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load F_Procedures.Paths[Derived Column Output]"
+          TopLeft="163.966664936476,351.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load F_Procedures.Paths[OLE DB Source Output]"
+          TopLeft="163.966664936476,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_Procedures\STG Procedures">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_Procedures\OLE DB Destination - F_Procedures">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_Procedures\Lookup - ProcedureKey">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_Procedures\Lookup - DateKey">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_Procedures\Lookup - PatientKey">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load F_Procedures\Lookup - TimeKey config">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Src to STG">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="196,41.6"
+          Id="Package\Src to STG\OLE DB Destination - STG Procedures"
+          TopLeft="77.4999990438421,136.266666136317" />
+        <NodeLayout
+          Size="239.2,41.6"
+          Id="Package\Src to STG\OLE DB Source - SRC Procedures"
+          TopLeft="60,60" />
+        <EdgeLayout
+          Id="Package\Src to STG.Paths[OLE DB Source Output]"
+          TopLeft="177.549999521921,101.6">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.6666661363174"
+              Start="0,0"
+              End="0,27.1666661363174">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.1666661363174" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Src to STG\OLE DB Destination - STG Procedures">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Src to STG\OLE DB Source - SRC Procedures">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

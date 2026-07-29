@@ -1,0 +1,2675 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/6/2026 1:15:53 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LAPTOP-4JV7CFDI"
+  DTS:CreatorName="LAPTOP-4JV7CFDI\George Ezat"
+  DTS:DTSID="{FC11CB56-33AC-4484-9F32-1B2FCCB38AE7}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="7"
+  DTS:VersionGUID="{B2464FE9-6134-4F1F-A4F9-509ED2354143}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.HospitalDWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{7C60BFEA-8522-4C3C-8C45-236993C43684}"
+      DTS:ObjectName="LocalHost.HospitalDWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalDWH;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{7C60BFEA-8522-4C3C-8C45-236993C43684}LocalHost.HospitalDWH;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.HospitalSTG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{817A21F3-0585-413D-8EC2-30D24C830B8C}"
+      DTS:ObjectName="LocalHost.HospitalSTG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalSTG;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{817A21F3-0585-413D-8EC2-30D24C830B8C}LocalHost.HospitalSTG;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load DimPatient SCD2"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{780DD661-F608-4B52-8026-0186788A0398}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load DimPatient SCD2"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load DimPatient SCD2\Close Old Record"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Close Old Record"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE dbo.DimPatient 
+SET IsCurrent = 0, ExpiryDate = GETDATE(), src_update_date = GETDATE()
+WHERE PatientKey = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimPatient SCD2\Close Old Record.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.HospitalDWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimPatient SCD2\Close Old Record.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Close Old Record.Inputs[OLE DB Command Input].Columns[LKP_PatientKey]"
+                      cachedDataType="i4"
+                      cachedName="LKP_PatientKey"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Close Old Record.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_PatientKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Close Old Record.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i4"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimPatient SCD2\Close Old Record.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Close Old Record.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\Close Old Record.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Close Old Record.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Close Old Record.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Close Old Record.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Close Old Record.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Close Old Record.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimPatient SCD2\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="FullName"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[FullName]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[Marital]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Marital"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Marital]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="City"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="State"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[State]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Zip"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Zip]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[LKP_FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="LKP_FullName"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_FullName]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[LKP_City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LKP_City"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_City]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[LKP_State]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LKP_State"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_State]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[LKP_Marital]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="LKP_Marital"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Marital]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input].Columns[LKP_Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="LKP_Zip"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Zip]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimPatient SCD2\Conditional Split.Outputs[ChangedRecord]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="ChangedRecord"
+                  synchronousInputId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[FullName]} != #{Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_FullName]} || #{Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[City]} != #{Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_City]} || #{Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[State]} != #{Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_State]} || #{Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Marital]} != #{Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Marital]} || #{Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Zip]} != #{Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Zip]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">FullName != LKP_FullName || City != LKP_City || State != LKP_State || Marital != LKP_Marital || Zip != LKP_Zip</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\Conditional Split.Outputs[No Change]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="No Change"
+                  synchronousInputId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimPatient SCD2\Insert DimPatient"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert DimPatient"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimPatient]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimPatient SCD2\Insert DimPatient.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.HospitalDWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="FullName"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[FullName]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      cachedDataType="dbDate"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[DeathDate]"
+                      cachedDataType="dbDate"
+                      cachedName="DeathDate"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[DeathDate]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[DeathDate]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[Race]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Race"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Race]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Race]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[Ethnicity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Ethnicity"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Ethnicity]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Ethnicity]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[Marital]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Marital"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Marital]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Marital]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="State"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[State]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[County]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="County"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[County]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Zip"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Zip]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[src_update_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="src_update_date"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[src_update_date]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[create_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="create_timestamp"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[create_timestamp]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[IsCurrent]"
+                      cachedDataType="bool"
+                      cachedName="IsCurrent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[IsCurrent]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[EffectiveDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveDate"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[EffectiveDate]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[ExpiryDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ExpiryDate"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[ExpiryDate]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[ExpiryDate]" />
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Id"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[PatientKey]"
+                      dataType="i4"
+                      name="PatientKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      dataType="wstr"
+                      length="50"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      dataType="wstr"
+                      length="150"
+                      name="FullName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[BirthDate]"
+                      dataType="dbDate"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[DeathDate]"
+                      dataType="dbDate"
+                      name="DeathDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Race]"
+                      dataType="wstr"
+                      length="50"
+                      name="Race" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Ethnicity]"
+                      dataType="wstr"
+                      length="50"
+                      name="Ethnicity" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Marital]"
+                      dataType="wstr"
+                      length="5"
+                      name="Marital" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="50"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="50"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[IsCurrent]"
+                      dataType="bool"
+                      name="IsCurrent" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      name="EffectiveDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[ExpiryDate]"
+                      dataType="dbTimeStamp"
+                      name="ExpiryDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimPatient SCD2\Insert DimPatient.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Insert DimPatient.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Insert DimPatient.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Insert DimPatient.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimPatient SCD2\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT PatientKey, PatientId, FullName, City, State, Marital, Zip
+FROM dbo.DimPatient 
+WHERE IsCurrent = 1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (SELECT PatientKey, PatientId, FullName, City, State, Marital, Zip
+FROM dbo.DimPatient 
+WHERE IsCurrent = 1) [refTable]
+where [refTable].[PatientId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="PatientKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PatientId" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="FullName" dataType="DT_WSTR" length="150" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="City" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="State" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Marital" dataType="DT_WSTR" length="5" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Zip" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimPatient SCD2\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.HospitalDWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load DimPatient SCD2\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Lookup.Inputs[Lookup Input].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Id"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">PatientId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_PatientKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_PatientKey]"
+                      name="LKP_PatientKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PatientKey</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_FullName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="150"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_FullName]"
+                      name="LKP_FullName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FullName</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_City]"
+                      name="LKP_City"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">City</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_State]"
+                      name="LKP_State"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">State</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Marital]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="5"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Marital]"
+                      name="LKP_Marital"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Marital</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Zip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="10"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Zip]"
+                      name="LKP_Zip"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Zip</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimPatient SCD2\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\Load DimPatient SCD2\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimPatient SCD2\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\Load DimPatient SCD2\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\Load DimPatient SCD2\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\Load DimPatient SCD2\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimPatient SCD2\Prep Changed Row"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Prep Changed Row"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load DimPatient SCD2\Prep Changed Row.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Prep Changed Row.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      name="IsCurrent"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_BOOL)1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_BOOL)1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output].Columns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output].Columns[EffectiveDate]"
+                      name="EffectiveDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output].Columns[ExpiryDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output].Columns[ExpiryDate]"
+                      name="ExpiryDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">NULL(DT_DBTIMESTAMP)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">NULL(DT_DBTIMESTAMP)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Prep Changed Row.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimPatient SCD2\Prep New Row"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Prep New Row"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Load DimPatient SCD2\Prep New Row.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Prep New Row.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      dataType="bool"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output].Columns[IsCurrent]"
+                      name="IsCurrent"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_BOOL)1</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_BOOL)1</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output].Columns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output].Columns[EffectiveDate]"
+                      name="EffectiveDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output].Columns[ExpiryDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output].Columns[ExpiryDate]"
+                      name="ExpiryDate"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">NULL(DT_DBTIMESTAMP)</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">NULL(DT_DBTIMESTAMP)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Load DimPatient SCD2\Prep New Row.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimPatient SCD2\STG_Patients"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="STG_Patients"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_patients]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load DimPatient SCD2\STG_Patients.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[LocalHost.HospitalSTG]"
+                  connectionManagerRefId="Package.ConnectionManagers[LocalHost.HospitalSTG]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Id]"
+                      name="Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[FullName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[FullName]"
+                      length="150"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[FullName]"
+                      name="FullName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      name="BirthDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[DeathDate]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[DeathDate]"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[DeathDate]"
+                      name="DeathDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="5"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Race]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Race]"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Race]"
+                      name="Race"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Ethnicity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity]"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Ethnicity]"
+                      name="Ethnicity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Marital]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Marital]"
+                      length="5"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Marital]"
+                      name="Marital"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[County]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[County]"
+                      name="County"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Zip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      length="10"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Zip]"
+                      name="Zip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      name="src_update_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[create_timestamp]"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[create_timestamp]"
+                      name="create_timestamp"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[FullName]"
+                      dataType="wstr"
+                      length="150"
+                      name="FullName" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      dataType="dbDate"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[DeathDate]"
+                      dataType="dbDate"
+                      name="DeathDate" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Race]"
+                      dataType="wstr"
+                      length="50"
+                      name="Race" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Ethnicity]"
+                      dataType="wstr"
+                      length="50"
+                      name="Ethnicity" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Marital]"
+                      dataType="wstr"
+                      length="5"
+                      name="Marital" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="50"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[County]"
+                      dataType="wstr"
+                      length="50"
+                      name="County" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[FullName]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[FullName]"
+                      name="FullName" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[DeathDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[DeathDate]"
+                      name="DeathDate" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Race]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Race]"
+                      name="Race" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Ethnicity]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Ethnicity]"
+                      name="Ethnicity" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Marital]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Marital]"
+                      name="Marital" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[State]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[County]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[County]"
+                      name="County" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      name="Zip" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      name="src_update_date" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[create_timestamp]"
+                      name="create_timestamp" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load DimPatient SCD2\Union All"
+              componentClassID="Microsoft.UnionAll"
+              contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
+              name="Union All"
+              version="1">
+              <inputs>
+                <input
+                  refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1]"
+                  name="Union All Input 1">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Id"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="FullName"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[FullName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[FullName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[BirthDate]"
+                      cachedDataType="dbDate"
+                      cachedName="BirthDate"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[BirthDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[BirthDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[DeathDate]"
+                      cachedDataType="dbDate"
+                      cachedName="DeathDate"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[DeathDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[DeathDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Gender"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Gender]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Gender]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[Race]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Race"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Race]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Race]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[Ethnicity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Ethnicity"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Ethnicity]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Ethnicity]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[Marital]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Marital"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Marital]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Marital]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="City"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[City]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[City]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="State"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[State]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[State]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[County]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="County"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[County]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[County]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Zip"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Zip]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Zip]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[src_update_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="src_update_date"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[src_update_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[src_update_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[create_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="create_timestamp"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[create_timestamp]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[create_timestamp]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[LKP_PatientKey]"
+                      cachedDataType="i4"
+                      cachedName="LKP_PatientKey"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_PatientKey]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_PatientKey]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[LKP_FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="LKP_FullName"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_FullName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_FullName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[LKP_City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LKP_City"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_City]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_City]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[LKP_State]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LKP_State"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_State]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_State]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[LKP_Marital]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="LKP_Marital"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Marital]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_Marital]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[LKP_Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="LKP_Zip"
+                      lineageId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output].Columns[LKP_Zip]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_Zip]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[IsCurrent]"
+                      cachedDataType="bool"
+                      cachedName="IsCurrent"
+                      lineageId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output].Columns[IsCurrent]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[IsCurrent]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[EffectiveDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveDate"
+                      lineageId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output].Columns[EffectiveDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1].Columns[ExpiryDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ExpiryDate"
+                      lineageId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output].Columns[ExpiryDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[ExpiryDate]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Id"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Id]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Id]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="150"
+                      cachedName="FullName"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[FullName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[FullName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[BirthDate]"
+                      cachedDataType="dbDate"
+                      cachedName="BirthDate"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[BirthDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[BirthDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[DeathDate]"
+                      cachedDataType="dbDate"
+                      cachedName="DeathDate"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[DeathDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[DeathDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Gender"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Gender]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Gender]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[Race]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Race"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Race]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Race]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[Ethnicity]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Ethnicity"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Ethnicity]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Ethnicity]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[Marital]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Marital"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Marital]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Marital]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="City"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[City]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[City]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[State]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="State"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[State]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[State]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[County]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="County"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[County]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[County]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Zip"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[Zip]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Zip]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[src_update_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="src_update_date"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[src_update_date]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[src_update_date]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[create_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="create_timestamp"
+                      lineageId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output].Columns[create_timestamp]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[create_timestamp]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[IsCurrent]"
+                      cachedDataType="bool"
+                      cachedName="IsCurrent"
+                      lineageId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output].Columns[IsCurrent]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[IsCurrent]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[EffectiveDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="EffectiveDate"
+                      lineageId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output].Columns[EffectiveDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2].Columns[ExpiryDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ExpiryDate"
+                      lineageId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output].Columns[ExpiryDate]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[ExpiryDate]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 3]"
+                  dangling="true"
+                  hasSideEffects="true"
+                  name="Union All Input 3">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1]"
+                  name="Union All Output 1">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[FullName]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[FullName]"
+                      name="FullName" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[BirthDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[DeathDate]"
+                      dataType="dbDate"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[DeathDate]"
+                      name="DeathDate" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Gender]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Race]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Race]"
+                      name="Race" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Ethnicity]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Ethnicity]"
+                      name="Ethnicity" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Marital]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Marital]"
+                      name="Marital" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[State]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[State]"
+                      name="State" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[County]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[County]"
+                      name="County" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[Zip]"
+                      name="Zip" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[src_update_date]"
+                      name="src_update_date" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[create_timestamp]"
+                      name="create_timestamp" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_PatientKey]"
+                      dataType="i4"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_PatientKey]"
+                      name="LKP_PatientKey" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_FullName]"
+                      dataType="wstr"
+                      length="150"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_FullName]"
+                      name="LKP_FullName" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_City]"
+                      name="LKP_City" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_State]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_State]"
+                      name="LKP_State" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_Marital]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_Marital]"
+                      name="LKP_Marital" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_Zip]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[LKP_Zip]"
+                      name="LKP_Zip" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[IsCurrent]"
+                      dataType="bool"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[IsCurrent]"
+                      name="IsCurrent" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[EffectiveDate]"
+                      name="EffectiveDate" />
+                    <outputColumn
+                      refId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[ExpiryDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1].Columns[ExpiryDate]"
+                      name="ExpiryDate" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load DimPatient SCD2.Paths[ChangedRecord]"
+              endId="Package\Load DimPatient SCD2\Multicast.Inputs[Multicast Input 1]"
+              name="ChangedRecord"
+              startId="Package\Load DimPatient SCD2\Conditional Split.Outputs[ChangedRecord]" />
+            <path
+              refId="Package\Load DimPatient SCD2.Paths[Derived Column Output]"
+              endId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 1]"
+              name="Derived Column Output"
+              startId="Package\Load DimPatient SCD2\Prep Changed Row.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load DimPatient SCD2.Paths[Derived Column Output1]"
+              endId="Package\Load DimPatient SCD2\Union All.Inputs[Union All Input 2]"
+              name="Derived Column Output"
+              startId="Package\Load DimPatient SCD2\Prep New Row.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Load DimPatient SCD2.Paths[Lookup Match Output]"
+              endId="Package\Load DimPatient SCD2\Conditional Split.Inputs[Conditional Split Input]"
+              name="Lookup Match Output"
+              startId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load DimPatient SCD2.Paths[Lookup No Match Output]"
+              endId="Package\Load DimPatient SCD2\Prep New Row.Inputs[Derived Column Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load DimPatient SCD2\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load DimPatient SCD2.Paths[Multicast Output 1]"
+              endId="Package\Load DimPatient SCD2\Close Old Record.Inputs[OLE DB Command Input]"
+              name="Multicast Output 1"
+              startId="Package\Load DimPatient SCD2\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\Load DimPatient SCD2.Paths[Multicast Output 2]"
+              endId="Package\Load DimPatient SCD2\Prep Changed Row.Inputs[Derived Column Input]"
+              name="Multicast Output 2"
+              startId="Package\Load DimPatient SCD2\Multicast.Outputs[Multicast Output 2]" />
+            <path
+              refId="Package\Load DimPatient SCD2.Paths[OLE DB Source Output]"
+              endId="Package\Load DimPatient SCD2\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load DimPatient SCD2\STG_Patients.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\Load DimPatient SCD2.Paths[Union All Output 1]"
+              endId="Package\Load DimPatient SCD2\Insert DimPatient.Inputs[OLE DB Destination Input]"
+              name="Union All Output 1"
+              startId="Package\Load DimPatient SCD2\Union All.Outputs[Union All Output 1]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate STG Patients"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{5DEC0528-50F4-4C33-9C9C-2A3AB723CC73}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate STG Patients"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{817A21F3-0585-413D-8EC2-30D24C830B8C}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.stg_patients;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3D0697FF-8038-43CC-A5FF-BDD554163296}"
+      DTS:From="Package\Load DimPatient SCD2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Truncate STG Patients" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="185.6,41.6"
+          Id="Package\Load DimPatient SCD2"
+          TopLeft="364.99998005728,86.6666660639975" />
+        <NodeLayout
+          Size="184,41.6"
+          Id="Package\Truncate STG Patients"
+          TopLeft="363.333313481676,182.866665395035" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="456.566646769478,128.266666063997">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54.5999993310371"
+              Start="0,0"
+              End="0,47.0999993310371">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.0999993310371" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load DimPatient SCD2">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="153.6,41.6"
+          Id="Package\Load DimPatient SCD2\Conditional Split"
+          TopLeft="317.499982652565,188.066665358875" />
+        <NodeLayout
+          Size="147.2,41.6"
+          Id="Package\Load DimPatient SCD2\Prep New Row"
+          TopLeft="604.999966944259,401.066665557755" />
+        <NodeLayout
+          Size="120,41.6"
+          Id="Package\Load DimPatient SCD2\Union All"
+          TopLeft="526.66663789087,533.133331278231" />
+        <NodeLayout
+          Size="168.8,41.6"
+          Id="Package\Load DimPatient SCD2\Prep Changed Row"
+          TopLeft="396.666644993756,398.733332146075" />
+        <NodeLayout
+          Size="158.4,41.6"
+          Id="Package\Load DimPatient SCD2\Insert DimPatient"
+          TopLeft="504.999972408018,674.399997975032" />
+        <NodeLayout
+          Size="143.2,41.6"
+          Id="Package\Load DimPatient SCD2\STG_Patients"
+          TopLeft="319.999982515972,21.6666665159994" />
+        <NodeLayout
+          Size="119.2,42.4"
+          Id="Package\Load DimPatient SCD2\Multicast"
+          TopLeft="337.499981559814,276.466664744152" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\Load DimPatient SCD2\Lookup"
+          TopLeft="335.83331498421,101.399999294877" />
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\Load DimPatient SCD2\Close Old Record"
+          TopLeft="214.999988252918,397.533331820634" />
+        <EdgeLayout
+          Id="Package\Load DimPatient SCD2.Paths[Union All Output 1]"
+          TopLeft="585.433305149444,574.733331278231">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,99.6666666968003"
+              Start="0,0"
+              End="0,92.1666666968003">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,92.1666666968003" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimPatient SCD2.Paths[OLE DB Source Output]"
+          TopLeft="391.916648750091,63.2666665159994">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.1333327788777"
+              Start="0,0"
+              End="0,30.6333327788777">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.6333327788777" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimPatient SCD2.Paths[Multicast Output 2]"
+          TopLeft="415.633314893147,318.866664744152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="65.4333301006091,79.8666674019231"
+              Start="0,0"
+              End="65.4333301006091,72.3666674019231">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.5813689533673" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.5813689533673"
+                    Point2="0,32.5813689533673"
+                    Point3="4,32.5813689533673" />
+                  <mssgle:LineSegment
+                    End="61.4333301006091,32.5813689533673" />
+                  <mssgle:CubicBezierSegment
+                    Point1="61.4333301006091,32.5813689533673"
+                    Point2="65.4333301006091,32.5813689533673"
+                    Point3="65.4333301006091,36.5813689533673" />
+                  <mssgle:LineSegment
+                    End="65.4333301006091,72.3666674019231" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimPatient SCD2.Paths[Multicast Output 1]"
+          TopLeft="378.56664822648,318.866664744152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-83.566659973562,78.6666670764818"
+              Start="0,0"
+              End="-83.566659973562,71.1666670764818">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28.0918323967634" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28.0918323967634"
+                    Point2="0,32.0918323967634"
+                    Point3="-4,32.0918323967634" />
+                  <mssgle:LineSegment
+                    End="-79.566659973562,32.0918323967634" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-79.566659973562,32.0918323967634"
+                    Point2="-83.566659973562,32.0918323967634"
+                    Point3="-83.566659973562,36.0918323967634" />
+                  <mssgle:LineSegment
+                    End="-83.566659973562,71.1666670764818" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimPatient SCD2.Paths[Lookup No Match Output]"
+          TopLeft="409.699981650877,142.999999294877">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="268.899985293382,258.066666262878"
+              Start="0,0"
+              End="268.899985293382,250.566666262878">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.9922615220798" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.9922615220798"
+                    Point2="0,16.9922615220798"
+                    Point3="4,16.9922615220798" />
+                  <mssgle:LineSegment
+                    End="264.899985293382,16.9922615220798" />
+                  <mssgle:CubicBezierSegment
+                    Point1="264.899985293382,16.9922615220798"
+                    Point2="268.899985293382,16.9922615220798"
+                    Point3="268.899985293382,20.9922615220798" />
+                  <mssgle:LineSegment
+                    End="268.899985293382,250.566666262878" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="78.6436059279411,21.9922615220798,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimPatient SCD2.Paths[Lookup Match Output]"
+          TopLeft="393.266648818388,142.999999294877">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.0666660639974"
+              Start="0,0"
+              End="0,37.5666660639974">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5666660639974" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,12.9786455319987,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimPatient SCD2.Paths[Derived Column Output1]"
+          TopLeft="678.599966944259,442.666665557755">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-73.2666623867223,90.4666657204758"
+              Start="0,0"
+              End="-73.2666623867223,82.9666657204758">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5657889134396" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,49.5657889134396"
+                    Point2="0,53.5657889134396"
+                    Point3="-4,53.5657889134396" />
+                  <mssgle:LineSegment
+                    End="-69.2666623867223,53.5657889134396" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-69.2666623867223,53.5657889134396"
+                    Point2="-73.2666623867223,53.5657889134396"
+                    Point3="-73.2666623867223,57.5657889134396" />
+                  <mssgle:LineSegment
+                    End="-73.2666623867223,82.9666657204758" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimPatient SCD2.Paths[Derived Column Output]"
+          TopLeft="481.066644993756,440.333332146075">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="86.9333262304471,92.7999991321562"
+              Start="0,0"
+              End="86.9333262304471,85.2999991321562">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.9473679071978" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,50.9473679071978"
+                    Point2="0,54.9473679071978"
+                    Point3="4,54.9473679071978" />
+                  <mssgle:LineSegment
+                    End="82.9333262304471,54.9473679071978" />
+                  <mssgle:CubicBezierSegment
+                    Point1="82.9333262304471,54.9473679071978"
+                    Point2="86.9333262304471,54.9473679071978"
+                    Point3="86.9333262304471,58.9473679071978" />
+                  <mssgle:LineSegment
+                    End="86.9333262304471,85.2999991321562" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load DimPatient SCD2.Paths[ChangedRecord]"
+          TopLeft="395.69998210619,229.666665358875">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.7999993852774"
+              Start="0,0"
+              End="0,39.2999993852774">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.2999993852774" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-35.1955078125,13.8184567238887,70.391015625,11.6630859375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimPatient SCD2\Insert DimPatient">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimPatient SCD2\STG_Patients">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load DimPatient SCD2\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string"></Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

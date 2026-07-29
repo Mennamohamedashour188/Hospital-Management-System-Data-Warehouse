@@ -1,0 +1,1191 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/4/2026 3:59:38 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MAYS\MSSQLSERVER1"
+  DTS:CreatorName="MAYS\MSSQLSERVER1\menna"
+  DTS:DTSID="{455891F1-AC30-4A37-B98C-37F8F4AF0902}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="15"
+  DTS:VersionGUID="{B2B1D8C9-213A-4D1A-BC3B-39497FFE5A70}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5A3C7863-CD24-4128-8FA8-53140572B197}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalDWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalDWH;Provider=SQLOLEDB.1;Integrated Security=SSPI;Auto Translate=False;Application Name=SSIS-Package1-{5A3C7863-CD24-4128-8FA8-53140572B197}MAYS\MSSQLSERVER1.HospitalDWH;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{0907720F-34DB-4F0C-A898-34AD76D3B1EE}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalSTG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalSTG;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{0907720F-34DB-4F0C-A898-34AD76D3B1EE}MAYS\MSSQLSERVER1.HospitalSTG;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Load Payer Dimension"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{58DD372B-A742-44D6-9F4F-D6E1EC55457B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Payer Dimension"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Payer Dimension\Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimPayer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimPayer]) [refTable]
+where [refTable].[PayerId] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="PayerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="PayerId" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Name" dataType="DT_WSTR" length="200" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="City" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="State" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Phone" dataType="DT_WSTR" length="20" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="src_update_date" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="create_timestamp" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Payer Dimension\Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Payer Dimension\Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\Lookup.Inputs[Lookup Input].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Id"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">PayerId</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Load Payer Dimension\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="200"
+                      lineageId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Name</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">City</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[State]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="10"
+                      lineageId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[State]"
+                      name="State"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">State</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[Phone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="20"
+                      lineageId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[Phone]"
+                      name="Phone"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">Phone</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[PayerId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Copy Column"
+                      length="50"
+                      lineageId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[PayerId]"
+                      name="PayerId"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">PayerId</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Load Payer Dimension\Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Load Payer Dimension\Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Payer Dimension\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE dbo.DimPayer
+SET 
+    Name = ?,
+    City = ?,
+    State = ?,
+    Phone = ?,
+  src_update_date = GETDATE()
+WHERE PayerId = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Payer Dimension\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].Columns[State_Headquartered]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="State_Headquartered"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[State_Headquartered]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].Columns[Phone]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Phone"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Phone]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].Columns[PayerId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PayerId"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output].Columns[PayerId]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="wstr"
+                      length="200"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="wstr"
+                      length="10"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
+                      dataType="wstr"
+                      length="20"
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="wstr"
+                      length="50"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Payer Dimension\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Load Payer Dimension\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Payer Dimension\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Payer Dimension\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Payer Dimension\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimPayer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Payer Dimension\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Phone]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Phone"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Phone]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[src_update_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="src_update_date"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[src_update_date]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[create_timestamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="create_timestamp"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[create_timestamp]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[State_Headquartered]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="State_Headquartered"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[State_Headquartered]" />
+                    <inputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Id"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayerId]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayerKey]"
+                      dataType="i4"
+                      name="PayerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PayerId]"
+                      dataType="wstr"
+                      length="50"
+                      name="PayerId" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="200"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State]"
+                      dataType="wstr"
+                      length="10"
+                      name="State" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      dataType="wstr"
+                      length="20"
+                      name="Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Payer Dimension\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Payer Dimension\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Payer Dimension\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Payer Dimension\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_payers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Payer Dimension\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      length="50"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
+                      name="Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      length="200"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      length="200"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Address]"
+                      name="Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="50"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[State_Headquartered]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State_Headquartered]"
+                      length="10"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[State_Headquartered]"
+                      name="State_Headquartered"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      length="10"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zip]"
+                      name="Zip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Phone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Phone]"
+                      length="20"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[Phone]"
+                      name="Phone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      name="src_update_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[create_timestamp]"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].Columns[create_timestamp]"
+                      name="create_timestamp"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="200"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      dataType="wstr"
+                      length="200"
+                      name="Address" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[State_Headquartered]"
+                      dataType="wstr"
+                      length="10"
+                      name="State_Headquartered" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Phone]"
+                      dataType="wstr"
+                      length="20"
+                      name="Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      name="Address" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State_Headquartered]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[State_Headquartered]"
+                      name="State_Headquartered" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      name="Zip" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Phone]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Phone]"
+                      name="Phone" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      name="src_update_date" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[create_timestamp]"
+                      name="create_timestamp" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Payer Dimension.Paths[Lookup Match Output]"
+              endId="Package\Load Payer Dimension\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Lookup Match Output"
+              startId="Package\Load Payer Dimension\Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Load Payer Dimension.Paths[Lookup No Match Output]"
+              endId="Package\Load Payer Dimension\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="Lookup No Match Output"
+              startId="Package\Load Payer Dimension\Lookup.Outputs[Lookup No Match Output]" />
+            <path
+              refId="Package\Load Payer Dimension.Paths[OLE DB Source Output]"
+              endId="Package\Load Payer Dimension\Lookup.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Payer Dimension\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate STG_Payers"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{909AD341-A823-4D33-B078-F01DE91161EA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate STG_Payers"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{0907720F-34DB-4F0C-A898-34AD76D3B1EE}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.[stg_payers]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{8B543046-9679-433D-AF27-30AA86ABC5D9}"
+      DTS:From="Package\Load Payer Dimension"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Truncate STG_Payers" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\Load Payer Dimension"
+          TopLeft="286.666651003891,65.8666662086381" />
+        <NodeLayout
+          Size="181.6,41.6"
+          Id="Package\Truncate STG_Payers"
+          TopLeft="297.499983745317,159.466665557755" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="378.266651003891,107.466666208638">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.0333327414262,51.9999993491172"
+              Start="0,0"
+              End="10.0333327414262,44.4999993491172">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.9999996745586" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.9999996745586"
+                    Point2="0,25.9999996745586"
+                    Point3="4,25.9999996745586" />
+                  <mssgle:LineSegment
+                    End="6.03333274142625,25.9999996745586" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.03333274142625,25.9999996745586"
+                    Point2="10.0333327414262,25.9999996745586"
+                    Point3="10.0333327414262,29.9999996745586" />
+                  <mssgle:LineSegment
+                    End="10.0333327414262,44.4999993491172" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Payer Dimension">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Load Payer Dimension\OLE DB Destination"
+          TopLeft="126.666659745905,246.133331621753" />
+        <NodeLayout
+          Size="152,41.6"
+          Id="Package\Load Payer Dimension\OLE DB Source"
+          TopLeft="305.833316623338,71.9333328331179" />
+        <NodeLayout
+          Size="112.8,41.6"
+          Id="Package\Load Payer Dimension\Lookup"
+          TopLeft="327.49998210619,162.066665539675" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Load Payer Dimension\OLE DB Command"
+          TopLeft="421.018495515082,266.259257407726" />
+        <EdgeLayout
+          Id="Package\Load Payer Dimension.Paths[OLE DB Source Output]"
+          TopLeft="382.866649364764,113.533332833118">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.5333327065574"
+              Start="0,0"
+              End="0,41.0333327065574">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.0333327065574" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Payer Dimension.Paths[Lookup No Match Output]"
+          TopLeft="383.89998210619,203.666665539675">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-171.633322360284,42.4666660820776"
+              Start="0,0"
+              End="-171.633322360284,34.9666660820776">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.2333330410388" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.2333330410388"
+                    Point2="0,21.2333330410388"
+                    Point3="-4,21.2333330410388" />
+                  <mssgle:LineSegment
+                    End="-167.633322360284,21.2333330410388" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-167.633322360284,21.2333330410388"
+                    Point2="-171.633322360284,21.2333330410388"
+                    Point3="-171.633322360284,25.2333330410388" />
+                  <mssgle:LineSegment
+                    End="-171.633322360284,34.9666660820776" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-141.623047898892,26.2333330410388,111.6127734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Load Payer Dimension.Paths[Lookup Match Output]"
+          TopLeft="401.366648772857,203.666665539675">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="103.251846742225,62.5925918680508"
+              Start="0,0"
+              End="103.251846742225,55.0925918680508">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.5622892663928" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,21.5622892663928"
+                    Point2="0,25.5622892663928"
+                    Point3="4,25.5622892663928" />
+                  <mssgle:LineSegment
+                    End="99.2518467422254,25.5622892663928" />
+                  <mssgle:CubicBezierSegment
+                    Point1="99.2518467422254,25.5622892663928"
+                    Point2="103.251846742225,25.5622892663928"
+                    Point3="103.251846742225,29.5622892663928" />
+                  <mssgle:LineSegment
+                    End="103.251846742225,55.0925918680508" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="3.43453665236269,30.5622892663928,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Payer Dimension\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Payer Dimension\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Payer Dimension\Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimPayer]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

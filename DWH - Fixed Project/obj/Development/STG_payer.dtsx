@@ -1,0 +1,792 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/4/2026 1:43:40 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MAYS\MSSQLSERVER1"
+  DTS:CreatorName="MAYS\MSSQLSERVER1\menna"
+  DTS:DTSID="{8DD7016B-3988-4243-9B92-70BF465CCE11}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="42"
+  DTS:VersionGUID="{2512FCFE-A1BD-489E-8A6D-988FF5BDBB56}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSource]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{2B987ABB-85C5-4670-9894-08D75A143D79}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalSource">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalSource;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{2B987ABB-85C5-4670-9894-08D75A143D79}MAYS\MSSQLSERVER1.HospitalSource;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{F41D8060-A829-4216-808A-05B01B2C6BB9}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalSTG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalSTG;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{F41D8060-A829-4216-808A-05B01B2C6BB9}MAYS\MSSQLSERVER1.HospitalSTG;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DD135EF3-7AF0-4859-8473-95829F1CAB42}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastExtractDate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1900</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Get Last Load Date"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{21A88972-FC98-4FDA-9ACE-13785DEFFFE0}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Get Last Load Date"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2B987ABB-85C5-4670-9894-08D75A143D79}"
+          SQLTask:SqlStatementSource="SELECT LastExtractedDate FROM dbo.ConfigTable WHERE TableName = 'payers'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::LastExtractDate" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load Source To STG"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{AE2B0B52-5255-4393-A674-23440CD74B47}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load Source To STG"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load Source To STG\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_payers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Source To STG\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Id"
+                      externalMetadataColumnId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Id]" />
+                    <inputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Address]"
+                      cachedDataType="wstr"
+                      cachedLength="200"
+                      cachedName="Address"
+                      externalMetadataColumnId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Address]" />
+                    <inputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[State_Headquartered]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="State_Headquartered"
+                      externalMetadataColumnId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State_Headquartered]"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[State_Headquartered]" />
+                    <inputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Zip]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Zip"
+                      externalMetadataColumnId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Zip]" />
+                    <inputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Phone]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Phone"
+                      externalMetadataColumnId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Phone]" />
+                    <inputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[src_update_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="src_update_date"
+                      externalMetadataColumnId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[src_update_date]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="200"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Address]"
+                      dataType="wstr"
+                      length="200"
+                      name="Address" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[State_Headquartered]"
+                      dataType="wstr"
+                      length="10"
+                      name="State_Headquartered" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[Phone]"
+                      dataType="wstr"
+                      length="20"
+                      name="Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load Source To STG\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Source To STG\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Source To STG\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load Source To STG\Source Payers"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Source Payers"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[payers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    Id,
+    Name,
+    Address,
+    City,
+   State_Headquartered,
+    Zip,
+    Phone,
+    LastModified AS src_update_date
+FROM dbo.payers
+WHERE LastModified &gt; ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{DD135EF3-7AF0-4859-8473-95829F1CAB42};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load Source To STG\Source Payers.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSource]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSource]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      length="50"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Id]"
+                      name="Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      length="200"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Address]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      length="200"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Address]"
+                      name="Address"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="50"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[State_Headquartered]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[State_Headquartered]"
+                      length="10"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[State_Headquartered]"
+                      name="State_Headquartered"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Zip]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      length="10"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Zip]"
+                      name="Zip"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Phone]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Phone]"
+                      length="20"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[Phone]"
+                      name="Phone"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      name="src_update_date"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="200"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Address]"
+                      dataType="wstr"
+                      length="200"
+                      name="Address" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="50"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[State_Headquartered]"
+                      dataType="wstr"
+                      length="10"
+                      name="State_Headquartered" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      name="Zip" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[Phone]"
+                      dataType="wstr"
+                      length="20"
+                      name="Phone" />
+                    <externalMetadataColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      dataType="wstr"
+                      length="200"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Address]"
+                      name="Address" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[State_Headquartered]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[State_Headquartered]"
+                      name="State_Headquartered" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Zip]"
+                      name="Zip" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Phone]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[Phone]"
+                      name="Phone" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      name="src_update_date" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load Source To STG.Paths[OLE DB Source Output]"
+              endId="Package\Load Source To STG\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load Source To STG\Source Payers.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate STG_Payers"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{8BC8065C-8B44-44DB-B905-603966D25D7B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate STG_Payers"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F41D8060-A829-4216-808A-05B01B2C6BB9}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.stg_payers" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update ConfigTable"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D5A168DB-F8C7-4D2A-9AC5-617255E1F610}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update ConfigTable"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2B987ABB-85C5-4670-9894-08D75A143D79}"
+          SQLTask:SqlStatementSource="UPDATE dbo.ConfigTable SET LastExtractedDate = GETDATE() WHERE TableName = 'payers'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E20C5A44-87BB-4154-97B6-FA4D58E9E6E8}"
+      DTS:From="Package\Truncate STG_Payers"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Get Last Load Date" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{0F5BB90D-7B2D-4EF4-8D1C-180455880956}"
+      DTS:From="Package\Get Last Load Date"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load Source To STG" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{68FF418D-AB48-4586-8D10-CD4564DAEC9F}"
+      DTS:From="Package\Load Source To STG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update ConfigTable" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="168,41.6"
+          Id="Package\Get Last Load Date"
+          TopLeft="261.666652369831,138.666665702396" />
+        <NodeLayout
+          Size="176,41.6"
+          Id="Package\Load Source To STG"
+          TopLeft="258.333319218623,224.466665105754" />
+        <NodeLayout
+          Size="181.6,41.6"
+          Id="Package\Truncate STG_Payers"
+          TopLeft="261.666652369831,40.7333330500788" />
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\Update ConfigTable"
+          TopLeft="257.499985930821,323.266664418711" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="349.066652369831,82.3333330500788">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.3333326523172"
+              Start="0,0"
+              End="0,48.8333326523172">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.8333326523172" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="345.999985794227,180.266665702396">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44.199999403358"
+              Start="0,0"
+              End="0,36.699999403358">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.699999403358" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="345.316652574722,266.066665105754">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.1999993129571"
+              Start="0,0"
+              End="0,49.6999993129571">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.6999993129571" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load Source To STG">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="146.4,41.6"
+          Id="Package\Load Source To STG\Source Payers"
+          TopLeft="253.333319491811,72.7999994937579" />
+        <NodeLayout
+          Size="171.2,41.6"
+          Id="Package\Load Source To STG\OLE DB Destination"
+          TopLeft="234.999987160167,162.933332200315" />
+        <EdgeLayout
+          Id="Package\Load Source To STG.Paths[OLE DB Source Output]"
+          TopLeft="323.566653325989,114.399999493758">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.5333327065573"
+              Start="0,0"
+              End="0,41.0333327065573">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.0333327065573" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-8,12.5166663532787,16,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Source To STG\Source Payers">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load Source To STG\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

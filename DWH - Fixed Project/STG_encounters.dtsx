@@ -1,0 +1,1010 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/4/2026 3:00:09 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="MAYS"
+  DTS:CreatorName="MAYS\HP ZBook 15u G6"
+  DTS:DTSID="{BEA23CA2-0644-4E62-ACF6-1136DE00F8E1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="17.0.1016.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="STG_encounters"
+  DTS:PackageType="5"
+  DTS:VersionBuild="11"
+  DTS:VersionGUID="{265A61DB-0BA4-4E00-8503-F9227CECE661}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalDWH]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{279AB6FE-B502-489F-91E1-5E4F97C76693}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalDWH">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalDWH;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-STG_encounters-{279AB6FE-B502-489F-91E1-5E4F97C76693}MAYS\MSSQLSERVER1.HospitalDWH;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSource]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{594DEE37-07FF-43FF-B80E-69207D98F14E}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalSource">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalSource;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-STG_patients-{594DEE37-07FF-43FF-B80E-69207D98F14E}MAYS\MSSQLSERVER1.HospitalSource;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D57D3FE2-6ED3-42EF-ACDE-4AE3A318B991}"
+      DTS:ObjectName="MAYS\MSSQLSERVER1.HospitalSTG">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=MAYS\MSSQLSERVER1;Initial Catalog=HospitalSTG;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-STG_patients-{D57D3FE2-6ED3-42EF-ACDE-4AE3A318B991}MAYS\MSSQLSERVER1.HospitalSTG;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{67E2999C-1BEA-4C77-9A56-3F53E7C14532}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="LastExtractDate">
+      <DTS:VariableValue
+        DTS:DataType="7">1/1/1900</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Get lastExtractDate"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AA125893-E289-472C-9C30-23CD61121E43}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Get lastExtractDate"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{594DEE37-07FF-43FF-B80E-69207D98F14E}"
+          SQLTask:SqlStatementSource="SELECT LastExtractedDate &#xA;FROM dbo.ConfigTable &#xA;WHERE TableName = 'encounters'"
+          SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ResultBinding
+            SQLTask:ResultName="0"
+            SQLTask:DtsVariableName="User::LastExtractDate" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute SQL Task - Truncate STG"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B3134D02-8527-4179-BA65-7CDC190FE0E7}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute SQL Task - Truncate STG"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{D57D3FE2-6ED3-42EF-ACDE-4AE3A318B991}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE dbo.stg_encounters" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load SRC to STG"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{EA2C7F34-715A-47D6-993D-E69F27774613}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load SRC to STG"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Load SRC to STG\OLE DB Destination - STG encounters"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination - STG encounters"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_encounters]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSTG]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[src_update_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="src_update_date"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[src_update_date]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[StartTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StartTime"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[StartTime]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[StartTime]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[StopTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="StopTime"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[StopTime]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[StopTime]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[PatientId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PatientId"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[PatientId]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[Code]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Code"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Code]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[Description]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="Description"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Description]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[ReasonCode]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="ReasonCode"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[ReasonCode]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[ReasonCode]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[ReasonDescription]"
+                      cachedDataType="wstr"
+                      cachedLength="500"
+                      cachedName="ReasonDescription"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[ReasonDescription]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[ReasonDescription]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[Payer_Coverage]"
+                      cachedDataType="r8"
+                      cachedName="Payer_Coverage"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Payer_Coverage]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Payer_Coverage]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[Total_Claim_Cost]"
+                      cachedDataType="r8"
+                      cachedName="Total_Claim_Cost"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Total_Claim_Cost]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Total_Claim_Cost]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[Base_Encounter_Cost]"
+                      cachedDataType="r8"
+                      cachedName="Base_Encounter_Cost"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Base_Encounter_Cost]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Base_Encounter_Cost]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[EncounterClass]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="EncounterClass"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[EncounterClass]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[EncounterClass]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[PayerId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="PayerId"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[PayerId]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[PayerId]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[OrganizationId]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="OrganizationId"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[OrganizationId]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[OrganizationId]" />
+                    <inputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Id"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[create_timestamp]"
+                      dataType="dbTimeStamp"
+                      name="create_timestamp" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[StartTime]"
+                      dataType="dbTimeStamp"
+                      name="StartTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[StopTime]"
+                      dataType="dbTimeStamp"
+                      name="StopTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[PatientId]"
+                      dataType="wstr"
+                      length="50"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Code]"
+                      dataType="wstr"
+                      length="20"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[ReasonCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="ReasonCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[ReasonDescription]"
+                      dataType="wstr"
+                      length="500"
+                      name="ReasonDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[OrganizationId]"
+                      dataType="wstr"
+                      length="50"
+                      name="OrganizationId" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[PayerId]"
+                      dataType="wstr"
+                      length="50"
+                      name="PayerId" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[EncounterClass]"
+                      dataType="wstr"
+                      length="50"
+                      name="EncounterClass" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Base_Encounter_Cost]"
+                      dataType="r8"
+                      name="Base_Encounter_Cost" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Total_Claim_Cost]"
+                      dataType="r8"
+                      name="Total_Claim_Cost" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input].ExternalColumns[Payer_Coverage]"
+                      dataType="r8"
+                      name="Payer_Coverage" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load SRC to STG\OLE DB Source - SRC encounters"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source - SRC encounters"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+    Id,
+    StartTime,
+    StopTime,
+    PatientId,
+    OrganizationId,
+    PayerId,
+    EncounterClass,
+    Code,
+    Description,
+    Base_Encounter_Cost,
+    Total_Claim_Cost,
+    Payer_Coverage,
+    ReasonCode,
+    ReasonDescription,
+    LastModified AS src_update_date
+FROM dbo.encounters
+WHERE LastModified &gt; ?</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping">"Parameter0:Input",{67E2999C-1BEA-4C77-9A56-3F53E7C14532};</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSource]"
+                  connectionManagerRefId="Package.ConnectionManagers[MAYS\MSSQLSERVER1.HospitalSource]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[src_update_date]"
+                      name="src_update_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[StartTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[StartTime]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[StartTime]"
+                      name="StartTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[StopTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[StopTime]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[StopTime]"
+                      name="StopTime"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[PatientId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[PatientId]"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[PatientId]"
+                      name="PatientId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Code]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                      length="20"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Code]"
+                      name="Code"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Description]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      length="500"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Description]"
+                      name="Description"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                      length="20"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[ReasonCode]"
+                      name="ReasonCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[ReasonDescription]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[ReasonDescription]"
+                      length="500"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[ReasonDescription]"
+                      name="ReasonDescription"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Id]"
+                      name="Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[OrganizationId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[OrganizationId]"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[OrganizationId]"
+                      name="OrganizationId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[PayerId]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[PayerId]"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[PayerId]"
+                      name="PayerId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[EncounterClass]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[EncounterClass]"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[EncounterClass]"
+                      name="EncounterClass"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Base_Encounter_Cost]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Base_Encounter_Cost]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Base_Encounter_Cost]"
+                      name="Base_Encounter_Cost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Total_Claim_Cost]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Total_Claim_Cost]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Total_Claim_Cost]"
+                      name="Total_Claim_Cost"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Payer_Coverage]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Payer_Coverage]"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].Columns[Payer_Coverage]"
+                      name="Payer_Coverage"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      name="src_update_date" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[StartTime]"
+                      dataType="dbTimeStamp"
+                      name="StartTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[StopTime]"
+                      dataType="dbTimeStamp"
+                      name="StopTime" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[PatientId]"
+                      dataType="wstr"
+                      length="50"
+                      name="PatientId" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Code]"
+                      dataType="wstr"
+                      length="20"
+                      name="Code" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Description]"
+                      dataType="wstr"
+                      length="500"
+                      name="Description" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[ReasonCode]"
+                      dataType="wstr"
+                      length="20"
+                      name="ReasonCode" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[ReasonDescription]"
+                      dataType="wstr"
+                      length="500"
+                      name="ReasonDescription" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[OrganizationId]"
+                      dataType="wstr"
+                      length="50"
+                      name="OrganizationId" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[PayerId]"
+                      dataType="wstr"
+                      length="50"
+                      name="PayerId" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[EncounterClass]"
+                      dataType="wstr"
+                      length="50"
+                      name="EncounterClass" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Base_Encounter_Cost]"
+                      dataType="r8"
+                      name="Base_Encounter_Cost" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Total_Claim_Cost]"
+                      dataType="r8"
+                      name="Total_Claim_Cost" />
+                    <externalMetadataColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output].ExternalColumns[Payer_Coverage]"
+                      dataType="r8"
+                      name="Payer_Coverage" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[StartTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[StartTime]"
+                      name="StartTime" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[StopTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[StopTime]"
+                      name="StopTime" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[PatientId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[PatientId]"
+                      name="PatientId" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[OrganizationId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[OrganizationId]"
+                      name="OrganizationId" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[PayerId]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[PayerId]"
+                      name="PayerId" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[EncounterClass]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[EncounterClass]"
+                      name="EncounterClass" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Code]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Code]"
+                      name="Code" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Description]"
+                      name="Description" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Base_Encounter_Cost]"
+                      dataType="r8"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Base_Encounter_Cost]"
+                      name="Base_Encounter_Cost" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Total_Claim_Cost]"
+                      dataType="r8"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Total_Claim_Cost]"
+                      name="Total_Claim_Cost" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Payer_Coverage]"
+                      dataType="r8"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[Payer_Coverage]"
+                      name="Payer_Coverage" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[ReasonCode]"
+                      name="ReasonCode" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[ReasonDescription]"
+                      dataType="wstr"
+                      length="500"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[ReasonDescription]"
+                      name="ReasonDescription" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[src_update_date]"
+                      name="src_update_date" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load SRC to STG.Paths[OLE DB Source Output]"
+              endId="Package\Load SRC to STG\OLE DB Destination - STG encounters.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Load SRC to STG\OLE DB Source - SRC encounters.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Update Config Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{712D2421-DD65-4BD8-9267-7FA395A548BA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Update Config Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{594DEE37-07FF-43FF-B80E-69207D98F14E}"
+          SQLTask:SqlStatementSource="UPDATE dbo.ConfigTable &#xA;SET LastExtractedDate = GETDATE() &#xA;WHERE TableName = 'encounters'" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{9DB0C517-DBF5-4983-B20B-2BE39EBB83BD}"
+      DTS:From="Package\Execute SQL Task - Get lastExtractDate"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute SQL Task - Truncate STG" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{CDF6D3BD-E259-42C5-9E14-3D86521B1EEF}"
+      DTS:From="Package\Execute SQL Task - Truncate STG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Load SRC to STG" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{D117024C-736E-42C6-BF2F-8FB7C24EDAEE}"
+      DTS:From="Package\Load SRC to STG"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Update Config Table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="264,41.6"
+          Id="Package\Execute SQL Task - Get lastExtractDate"
+          TopLeft="79.9999956289929,62.3999995660782" />
+        <NodeLayout
+          Size="239.2,41.6"
+          Id="Package\Execute SQL Task - Truncate STG"
+          TopLeft="89.9999950826171,141.266665684316" />
+        <NodeLayout
+          Size="161.6,41.6"
+          Id="Package\Load SRC to STG"
+          TopLeft="129.999993989865,238.333331675993" />
+        <NodeLayout
+          Size="173.6,41.6"
+          Id="Package\Update Config Table"
+          TopLeft="129.133327414261,326.599997739991" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="210.799995355805,103.999999566078">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.2666661182378"
+              Start="0,0"
+              End="0,29.7666661182378">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.7666661182378" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="210.199994536241,182.866665684316">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,55.4666659916772"
+              Start="0,0"
+              End="0,47.9666659916772">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.9666659916772" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="213.366660702063,279.933331675993">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.6666660639975"
+              Start="0,0"
+              End="0,39.1666660639975">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39.1666660639975" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Load SRC to STG">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="196,41.6"
+          Id="Package\Load SRC to STG\OLE DB Destination - STG encounters"
+          TopLeft="131.666659472717,130.866665756636" />
+        <NodeLayout
+          Size="223.2,41.6"
+          Id="Package\Load SRC to STG\OLE DB Source - SRC encounters"
+          TopLeft="124.166659882499,48.5333329958386" />
+        <EdgeLayout
+          Id="Package\Load SRC to STG.Paths[OLE DB Source Output]"
+          TopLeft="232.716659677608,90.1333329958386">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.7333327607974"
+              Start="0,0"
+              End="0,33.2333327607974">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.2333327607974" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load SRC to STG\OLE DB Destination - STG encounters">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load SRC to STG\OLE DB Source - SRC encounters">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

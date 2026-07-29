@@ -1,0 +1,280 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\F_Procedures.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:F_Procedures.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\FACT_Insurance.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:FACT_Insurance.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\FACT_Encounters.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:FACT_Encounters.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimDate.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:DimDate.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimTime.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:DimTime.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimProcedure.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:DimProcedure.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimPatient.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:DimPatient.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimEncounterType.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:DimEncounterType.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DIM_Payers.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:DIM_Payers.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DIM_Organization.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:DIM_Organization.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_encounters.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:STG_encounters.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_patients.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:STG_patients.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_payer.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:STG_payer.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_procedures.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:STG_procedures.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_organizations.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:STG_organizations.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\Master.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design",
+      "RelativeMoniker": "D:0:0:{EB0945DC-210A-1612-F8CC-CC9F942C572E}|DWH - Collected Project.dtproj|solutionrelative:Master.dtsx||{CC84AFBD-DA02-46F4-8623-9F07E5569EDB}|Design"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 15,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FACT_Insurance.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\FACT_Insurance.dtsx",
+              "RelativeDocumentMoniker": "FACT_Insurance.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\FACT_Insurance.dtsx [Design]",
+              "RelativeToolTip": "FACT_Insurance.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:11:09.432Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FACT_Encounters.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\FACT_Encounters.dtsx",
+              "RelativeDocumentMoniker": "FACT_Encounters.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\FACT_Encounters.dtsx [Design]",
+              "RelativeToolTip": "FACT_Encounters.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:11:02.496Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DimDate.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimDate.dtsx",
+              "RelativeDocumentMoniker": "DimDate.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimDate.dtsx [Design]",
+              "RelativeToolTip": "DimDate.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:54.461Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DimTime.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimTime.dtsx",
+              "RelativeDocumentMoniker": "DimTime.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimTime.dtsx [Design]",
+              "RelativeToolTip": "DimTime.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:51.166Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DimProcedure.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimProcedure.dtsx",
+              "RelativeDocumentMoniker": "DimProcedure.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimProcedure.dtsx [Design]",
+              "RelativeToolTip": "DimProcedure.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:47.726Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DimPatient.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimPatient.dtsx",
+              "RelativeDocumentMoniker": "DimPatient.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimPatient.dtsx [Design]",
+              "RelativeToolTip": "DimPatient.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:44.966Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DimEncounterType.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimEncounterType.dtsx",
+              "RelativeDocumentMoniker": "DimEncounterType.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DimEncounterType.dtsx [Design]",
+              "RelativeToolTip": "DimEncounterType.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:43.432Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DIM_Organization.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DIM_Organization.dtsx",
+              "RelativeDocumentMoniker": "DIM_Organization.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DIM_Organization.dtsx [Design]",
+              "RelativeToolTip": "DIM_Organization.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:39.466Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "STG_encounters.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_encounters.dtsx",
+              "RelativeDocumentMoniker": "STG_encounters.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_encounters.dtsx [Design]",
+              "RelativeToolTip": "STG_encounters.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:36.08Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "STG_patients.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_patients.dtsx",
+              "RelativeDocumentMoniker": "STG_patients.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_patients.dtsx [Design]",
+              "RelativeToolTip": "STG_patients.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:33.631Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "STG_payer.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_payer.dtsx",
+              "RelativeDocumentMoniker": "STG_payer.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_payer.dtsx [Design]",
+              "RelativeToolTip": "STG_payer.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:31.291Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "STG_procedures.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_procedures.dtsx",
+              "RelativeDocumentMoniker": "STG_procedures.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_procedures.dtsx [Design]",
+              "RelativeToolTip": "STG_procedures.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:28.247Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "STG_organizations.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_organizations.dtsx",
+              "RelativeDocumentMoniker": "STG_organizations.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\STG_organizations.dtsx [Design]",
+              "RelativeToolTip": "STG_organizations.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-12T15:10:22.463Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DIM_Payers.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DIM_Payers.dtsx",
+              "RelativeDocumentMoniker": "DIM_Payers.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\DIM_Payers.dtsx [Design]",
+              "RelativeToolTip": "DIM_Payers.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-10T14:48:03.161Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "F_Procedures.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\F_Procedures.dtsx",
+              "RelativeDocumentMoniker": "F_Procedures.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\F_Procedures.dtsx [Design]",
+              "RelativeToolTip": "F_Procedures.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-10T14:15:28.662Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Master.dtsx [Design]",
+              "DocumentMoniker": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\Master.dtsx",
+              "RelativeDocumentMoniker": "Master.dtsx",
+              "ToolTip": "D:\\SSIS - DWH\\DWH_Final_Fixed_v2\\DWH - Fixed Project\\Master.dtsx [Design]",
+              "RelativeToolTip": "Master.dtsx [Design]",
+              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVDhPjZQ7bJtVGIaf41vsOk7ihICdxK1wiWiTFhW1QBEDapEQAnVoOzGUAalDNybECgsINqQOrBUDGzAgIUCVijoUqAQoTuM4JW4dO3Yuvvz2/9v//TC4/mM7ROGVPumc73zvq/d85yIAPvniq9/S8ydf4hComk5lZ/fHv\u002B7fu/nd11/\u002BMLyOlDLQG59Mz5CamRosGMLdP1ZZWlk9r1mIK\u002B99wM/f37rTUmqqVyCE8ANcePPS9RdfWJidS0xxJDxyYOSL21iOGx6NRie3qsrs9NOJWkdt1rSW0u5p\u002Bjz1/wm/348r5eT2bu1iPJG\u002BFhmdmO9fHxDUTYfthuGFptsY1l5O1V0e5ov8nckSG42GipvlKy1Ve65fw\u002BshQHajxbf3Kt78jTPTTI\u002BF\u002BObXEgAtxSCeSPPOsyksy\u002Ban23f62F0MOHQl6K6P9vgM2sQsVjjWzTnQHksg506wcPYsr7\u002B8SDAYRAjRT4dhQQCkizA0hK4hbPNJTiKMDgHLIBYOMTE\u002BNszyMCA4Hg2yOBflVNzmdNxiOuwSiwRYTI1yatJmcdwiHnLoOP2sQQz08HgyyvFktD8FwLULKSSgW6BaUKjUhks87N/yAdAtaFmgGNC2wR8MAYf08J\u002Byxq3bG14sPW7iuNCxu86ahqRhSFRTIBFw2KEomsVyUSNTD7JUD1Jp\u002B9EdaJmgGJKG0XWomRLp2CBlPx2GBQEQPuRIBBmOYooAqtlzBnUdqk2TmqKju0Fik0mS6dML8dSZixw5dm6foE9A2OcSaZSJ1Es4quqJNXRodCSlrSaPNhq0gzMsnH\u002BbS\u002B9//OG5q5//wtF3bzJ8yidSMW5MRTAsUG1whZ\u002Bm2d1m0wTNAsuFuaciXH0tyW5Dp7SlUSlU90z1Btn1Te7ef8DSgxwrqznW13KsraywtpxhM5ehsZ5BLy7jNre6RCnptC2q9Q4t7ckD6Dk0TZs/Mzl2qgffrx4CE0cZOfY8hbLKWkEh\u002B1ihUvV\u002Br65gPv9webepy0Kh2M/9Tzwz/2rSFImU1Drkyy0elVVKO3uC\u002By/SYUi89RGzlz8dTqPlfyf72Sv/AiuphR\u002BNLPK3AAAAAElFTkSuQmCC",
+              "WhenOpened": "2026-05-07T12:20:23.628Z",
+              "EditorCaption": " [Design]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
